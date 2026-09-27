@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memes Herlinda Toral - Plataforma de Memes y Cursos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Impact&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        plomo: {
+                            800: '#2b303a',
+                            900: '#1a1d24',
+                            950: '#12141a',
+                        },
+                        marino: {
+                            400: '#3b82f6',
+                            500: '#004080',
+                            600: '#003366',
+                            800: '#002244',
+                            900: '#0a192f',
+                        }
+                    },
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif'],
+                        impact: ['Impact', 'Arial Black', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #12141a;
+            color: #ffffff;
+        }
+        
+        .glass-panel {
+            background: rgba(26, 29, 36, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .meme-text {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            color: white;
+            text-transform: uppercase;
+            text-shadow: 
+                -2px -2px 0 #000,  
+                 2px -2px 0 #000,
+                -2px  2px 0 #000,
+                 2px  2px 0 #000,
+                0px 3px 5px rgba(0,0,0,0.8);
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .ht-shield-container {
+            filter: drop-shadow(0 4px 6px rgba(0, 51, 102, 0.4));
+            transition: transform 0.2s ease;
+        }
+        .ht-shield-container:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes heartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .animate-heart {
+            animation: heartPulse 0.3s ease-in-out;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12141a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2b303a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #004080;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-plomo-950 text-white antialiased selection:bg-marino-500 selection:text-white">
+
+    <header class="sticky top-0 z-40 bg-marino-900/95 backdrop-blur-md border-b border-white/10 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            <!-- Logo Herlinda Toral con Escudo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchSection('memes')">
+                <div class="ht-shield-container flex-shrink-0">
+                    <img src="image_fa9fc1.png" alt="Escudo Herlinda Toral" class="h-12 w-auto object-contain rounded-sm" onerror="this.onerror=null; this.src='https://placehold.co/100x120/003366/ffffff?text=HT';">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-white leading-tight">
+                        Memes <span class="text-marino-400">Herlinda T.</span>
+                    </span>
+                    <span class="text-[10px] text-slate-300 font-semibold tracking-wider flex items-center gap-1.5 uppercase">
+                        <span class="text-amber-400 font-bold">Scientia et Virtus</span>
+                        <span class="text-slate-500">•</span>
+                        <i class="fa-solid fa-shield-halved text-[9px] text-emerald-400"></i> Seguro
+                    </span>
+                </div>
+            </div>
+
+            <!-- Main Navigation Tabs: MEMES y CURSOS -->
+            <div class="hidden sm:flex items-center bg-plomo-950 p-1.5 rounded-2xl border border-slate-800">
+                <button id="nav-memes" onclick="switchSection('memes')" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all bg-marino-600 text-white shadow-md">
+                    <i class="fa-solid fa-face-laugh-squint text-sm"></i>
+                    <span>Memes</span>
+                </button>
+                <button id="nav-cursos" onclick="switchSection('cursos')" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-300 hover:text-white hover:bg-plomo-900">
+                    <i class="fa-solid fa-school text-sm text-marino-400"></i>
+                    <span>Cursos</span>
+                </button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2">
+                <button onclick="openModal('creatorModal')" class="hidden md:flex items-center gap-2 bg-plomo-800 hover:bg-slate-700 text-white border border-slate-600/60 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all">
+                    <i class="fa-solid fa-wand-magic-sparkles text-marino-400"></i>
+                    <span>Crear Meme</span>
+                </button>
+                <button onclick="openModal('uploadModal')" class="flex items-center gap-2 bg-gradient-to-r from-marino-600 to-marino-500 hover:from-marino-500 hover:to-marino-400 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg shadow-marino-900/50 transform active:scale-95 transition-all">
+                    <i class="fa-solid fa-plus text-sm"></i>
+                    <span>Subir Meme</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Tabs Bar -->
+        <div class="flex sm:hidden border-t border-slate-800 bg-plomo-900 px-2 py-1.5 justify-around">
+            <button id="nav-memes-mobile" onclick="switchSection('memes')" class="flex-1 py-2 text-center text-xs font-bold text-marino-400 border-b-2 border-marino-400">
+                <i class="fa-solid fa-face-laugh-squint mr-1"></i> Memes
+            </button>
+            <button id="nav-cursos-mobile" onclick="switchSection('cursos')" class="flex-1 py-2 text-center text-xs font-bold text-slate-400">
+                <i class="fa-solid fa-school mr-1"></i> Cursos
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ================= SECTION 1: MEMES ================= -->
+        <div id="section-memes" class="space-y-6">
+            
+            <!-- Hero Banner with Emblem -->
+            <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-marino-500 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden bg-gradient-to-r from-marino-900/90 via-plomo-900 to-plomo-950">
+                <div class="space-y-2 z-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-marino-600/30 border border-marino-500/40 text-marino-400 text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-graduation-cap"></i> Colegio Herlinda Toral
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                        La Galería de Memes Estudiantil
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
+                        Comparte los mejores momentos, chistes de clase y creatividad de la institución. Entorno moderado y seguro para todos.
+                    </p>
+                </div>
+                <div class="flex items-center gap-4 z-10 flex-shrink-0">
+                    <div class="w-20 h-24 sm:w-24 sm:h-28 bg-plomo-950/80 p-2 rounded-2xl border border-white/10 flex items-center justify-center shadow-xl">
+                        <img src="image_fa9fc1.png" alt="Escudo Herlinda Toral" class="h-full w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x120/003366/ffffff?text=HT';">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search & Filters Bar -->
+            <div class="glass-panel p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-md">
+                <!-- Search Input -->
+                <div class="relative w-full md:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Buscar memes en Herlinda T..." 
+                        class="w-full pl-9 pr-4 py-2 bg-plomo-950 border border-slate-700/80 rounded-xl focus:outline-none focus:border-marino-400 text-xs text-white placeholder-slate-400 transition-all">
+                </div>
+
+                <!-- Sort Options -->
+                <div class="flex items-center gap-1 bg-plomo-950 p-1 rounded-xl border border-slate-800 w-full md:w-auto justify-center">
+                    <button id="sort-trending" onclick="setSort('trending')" class="flex-1 md:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-marino-600 text-white">
+                        <i class="fa-solid fa-fire mr-1"></i>Tendencias
+                    </button>
+                    <button id="sort-latest" onclick="setSort('latest')" class="flex-1 md:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-300 hover:text-white">
+                        <i class="fa-solid fa-clock mr-1"></i>Recientes
+                    </button>
+                    <button id="sort-top" onclick="setSort('top')" class="flex-1 md:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-300 hover:text-white">
+                        <i class="fa-solid fa-trophy mr-1"></i>Top Votados
+                    </button>
+                </div>
+
+                <div class="text-xs text-slate-300 font-medium hidden lg:block" id="memeCountText">
+                    Cargando memes...
+                </div>
+            </div>
+
+            <!-- Layout Grid: Memes Feed + Notice Sidebar -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Main Feed -->
+                <div class="lg:col-span-2 space-y-6" id="memeFeed">
+                    <!-- Dynamic Memes Go Here -->
+                </div>
+
+                <!-- Right Sidebar Notice & Course Highlights -->
+                <aside class="space-y-6">
+                    <!-- Community Shield Notice -->
+                    <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-emerald-500 bg-plomo-900/90 space-y-3">
+                        <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-shield-cat text-base"></i>
+                            <span>Comunidad Herlinda Toral</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Respetamos el lema institucional <em>"Scientia et Virtus"</em>. Queda estrictamente prohibido el contenido Gore, acoso, pedofilia o agresiones directas.
+                        </p>
+                    </div>
+
+                    <!-- Quick Course Shortcuts -->
+                    <div class="glass-panel p-5 rounded-2xl space-y-4">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center justify-between">
+                            <span>Acceso Rápido a Cursos</span>
+                            <i class="fa-solid fa-school text-marino-400"></i>
+                        </h3>
+                        <div class="space-y-2" id="quickCourseList">
+                            <!-- Rendered dynamically -->
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden text-center py-16 glass-panel rounded-2xl space-y-4">
+                <img src="image_fa9fc1.png" alt="Escudo HT" class="h-20 w-auto mx-auto opacity-50 grayscale" onerror="this.onerror=null; this.src='https://placehold.co/100x120/003366/ffffff?text=HT';">
+                <h3 class="text-lg font-bold text-slate-200">No se encontraron memes</h3>
+                <p class="text-sm text-slate-400 max-w-md mx-auto">Intenta cambiar la búsqueda o ser el primero en subir un meme para este curso.</p>
+                <button onclick="resetFilters()" class="px-4 py-2 bg-marino-600 text-white rounded-xl text-xs font-semibold hover:bg-marino-500">
+                    Limpiar Búsqueda
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= SECTION 2: CURSOS ================= -->
+        <div id="section-cursos" class="hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-marino-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <img src="image_fa9fc1.png" alt="Escudo Herlinda Toral" class="h-12 w-auto object-contain hidden sm:block" onerror="this.onerror=null; this.src='https://placehold.co/100x120/003366/ffffff?text=HT';">
+                    <div>
+                        <h2 class="text-xl font-black text-white flex items-center gap-2">
+                            <span>Cursos e Informes - Herlinda Toral</span>
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">
+                            Selecciona un curso para ver comunicados, avisos estudiantiles y memes destacados del paralelo.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 bg-plomo-950 px-3 py-1.5 rounded-xl border border-slate-800 text-xs font-semibold text-slate-300">
+                    <i class="fa-solid fa-users text-marino-400"></i>
+                    <span id="activeCourseCount">4 Cursos Activos</span>
+                </div>
+            </div>
+
+            <!-- Courses Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="coursesGrid">
+                <!-- Dynamic Course Cards -->
+            </div>
+
+            <!-- Selected Course Modal / Detail View Container -->
+            <div id="courseDetailCard" class="hidden glass-panel p-6 rounded-2xl border border-marino-500/50 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-marino-600 flex items-center justify-center font-bold text-white text-lg" id="detailCourseIcon">
+                            1º
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white" id="detailCourseTitle">1ro Bachillerato</h3>
+                            <p class="text-xs text-slate-400" id="detailCourseSubtitle">Anuncios y Memes del Aula</p>
+                        </div>
+                    </div>
+                    <button onclick="closeCourseDetail()" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Course Notices -->
+                    <div class="bg-plomo-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-marino-400 flex items-center gap-2">
+                            <i class="fa-solid fa-bullhorn"></i> Avisos del Curso
+                        </h4>
+                        <div class="space-y-2 text-xs" id="detailCourseNotices">
+                            <!-- Avisos dinámicos -->
+                        </div>
+                    </div>
+
+                    <!-- Course Memes Highlights -->
+                    <div class="bg-plomo-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-2">
+                            <i class="fa-solid fa-fire"></i> Memes Populares del Curso
+                        </h4>
+                        <div class="space-y-2 text-xs" id="detailCourseMemes">
+                            <!-- Memes del curso -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal: Subir Meme -->
+    <div id="uploadModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity">
+        <div class="glass-panel w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl border border-slate-700/80 flex flex-col max-h-[90vh]">
+            <div class="px-6 py-4 bg-marino-900 border-b border-slate-700 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <img src="image_fa9fc1.png" alt="HT Shield" class="h-6 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x120/003366/ffffff?text=HT';">
+                    <h3 class="text-base font-bold text-white">Subir Meme - Herlinda T.</h3>
+                </div>
+                <button onclick="closeModal('uploadModal')" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <form id="uploadForm" onsubmit="handleMemeUpload(event)" class="p-6 space-y-4 overflow-y-auto flex-1">
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Título del Meme</label>
+                    <input type="text" id="memeTitle" required placeholder="Ej: Cuando no estudiaste para la lección de química..." 
+                        class="w-full px-3.5 py-2.5 bg-plomo-950 border border-slate-700 rounded-xl focus:outline-none focus:border-marino-400 text-xs text-white placeholder-slate-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Curso Asociado</label>
+                        <select id="memeCourseSelect" class="w-full px-3.5 py-2.5 bg-plomo-950 border border-slate-700 rounded-xl focus:outline-none focus:border-marino-400 text-xs text-white">
+                            <option value="General">General / Todos</option>
+                            <option value="1ro Bachillerato">1ro Bachillerato</option>
+                            <option value="2do Bachillerato">2do Bachillerato</option>
+                            <option value="3ro Bachillerato">3ro Bachillerato</option>
+                            <option value="Educación Básica">Educación Básica</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Tu Nombre / Nick</label>
+                        <input type="text" id="memeAuthor" placeholder="Estudiante" value="AlumnoHT" 
+                            class="w-full px-3.5 py-2.5 bg-plomo-950 border border-slate-700 rounded-xl focus:outline-none focus:border-marino-400 text-xs text-white">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Origen de Imagen</label>
+                    <div class="flex gap-2 mb-3">
+                        <button type="button" id="tab-file" onclick="switchImageTab('file')" class="flex-1 py-1.5 bg-marino-600 text-white rounded-lg text-xs font-bold">
+                            Subir Archivo
+                        </button>
+                        <button type="button" id="tab-url" onclick="switchImageTab('url')" class="flex-1 py-1.5 bg-plomo-800 text-slate-300 rounded-lg text-xs font-bold">
+                            Enlace URL
+                        </button>
+                    </div>
+
+                    <div id="input-file-container" class="border-2 border-dashed border-slate-700 hover:border-marino-400 rounded-xl p-5 text-center cursor-pointer transition-colors relative bg-plomo-950/50" onclick="document.getElementById('fileInput').click()">
+                        <i class="fa-solid fa-file-image text-3xl text-slate-400 mb-2"></i>
+                        <p class="text-xs text-slate-200 font-semibold">Haz clic o arrastra una imagen</p>
+                        <p class="text-[10px] text-slate-400 mt-1">PNG, JPG, GIF (Pasará por el filtro de seguridad)</p>
+                        <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="previewUploadedFile(event)">
+                    </div>
+
+                    <div id="input-url-container" class="hidden">
+                        <input type="url" id="imageUrlInput" placeholder="https://ejemplo.com/meme.jpg" oninput="previewUrlImage()" 
+                            class="w-full px-3.5 py-2.5 bg-plomo-950 border border-slate-700 rounded-xl focus:outline-none focus:border-marino-400 text-xs text-white placeholder-slate-500">
+                    </div>
+                </div>
+
+                <!-- Moderation Scan Overlay Progress -->
+                <div id="scanStatus" class="hidden p-3 rounded-xl bg-slate-900 border border-slate-700 flex items-center gap-3">
+                    <i class="fa-solid fa-spinner fa-spin text-marino-400 text-lg"></i>
+                    <div class="flex-1 text-xs">
+                        <p class="font-bold text-white">Escaneando seguridad Herlinda T...</p>
+                        <p class="text-slate-400">Verificando normas comunitarias y filtros antiviolencia</p>
+                    </div>
+                </div>
+
+                <div id="uploadPreviewContainer" class="hidden space-y-1">
+                    <span class="text-[10px] font-bold text-slate-300 uppercase">Vista Previa:</span>
+                    <div class="max-h-48 rounded-xl overflow-hidden bg-plomo-950 flex items-center justify-center border border-slate-800">
+                        <img id="uploadPreviewImage" src="" alt="Vista previa" class="max-h-48 object-contain">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="btnSubmitMeme" class="w-full py-3 bg-gradient-to-r from-marino-600 to-marino-500 hover:from-marino-500 hover:to-marino-400 text-white font-bold rounded-xl shadow-lg shadow-marino-900/40 active:scale-98 transition-all flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-shield-check"></i>
+                        <span>Validar y Publicar Meme</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Generador / Creador de Memes -->
+    <div id="creatorModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity">
+        <div class="glass-panel w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl border border-slate-700/80 flex flex-col max-h-[95vh]">
+            <div class="px-6 py-4 bg-marino-900 border-b border-slate-700 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-marino-400"></i>
+                    <h3 class="text-base font-bold text-white">Creador de Memes Herlinda Toral</h3>
+                </div>
+                <button onclick="closeModal('creatorModal')" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6 flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Controls -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">Plantilla</label>
+                        <div class="grid grid-cols-3 gap-2" id="templatePicker">
+                            <!-- Dynamic Templates -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">Texto Superior</label>
+                        <input type="text" id="topTextInput" oninput="updateMemeCanvas()" placeholder="CUANDO EL PROFE DICE..." 
+                            class="w-full px-3 py-2 bg-plomo-950 border border-slate-700 rounded-xl focus:outline-none focus:border-marino-400 text-xs text-white">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">Texto Inferior</label>
+                        <input type="text" id="bottomTextInput" oninput="updateMemeCanvas()" placeholder="EXAMEN SORPRESA EN HT" 
+                            class="w-full px-3 py-2 bg-plomo-950 border border-slate-700 rounded-xl focus:outline-none focus:border-marino-400 text-xs text-white">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">Título de Publicación</label>
+                        <input type="text" id="createdMemeTitle" placeholder="Situación en Herlinda Toral" 
+                            class="w-full px-3 py-2 bg-plomo-950 border border-slate-700 rounded-xl focus:outline-none focus:border-marino-400 text-xs text-white">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">Curso</label>
+                            <select id="createdMemeCourse" class="w-full px-3 py-2 bg-plomo-950 border border-slate-700 rounded-xl text-xs text-white">
+                                <option value="General">General</option>
+                                <option value="1ro Bachillerato">1ro Bachillerato</option>
+                                <option value="2do Bachillerato">2do Bachillerato</option>
+                                <option value="3ro Bachillerato">3ro Bachillerato</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">Tu Nombre</label>
+                            <input type="text" id="createdMemeAuthor" value="CreadorHT" class="w-full px-3 py-2 bg-plomo-950 border border-slate-700 rounded-xl text-xs text-white">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Area -->
+                <div class="flex flex-col items-center justify-between space-y-4">
+                    <div class="w-full flex-1 bg-plomo-950 rounded-xl border border-slate-800 p-2 flex items-center justify-center overflow-hidden min-h-[220px]">
+                        <canvas id="memeCanvas" class="max-w-full max-h-[260px] object-contain rounded-lg shadow-lg"></canvas>
+                    </div>
+
+                    <button onclick="publishCreatedMeme()" class="w-full py-3 bg-gradient-to-r from-marino-600 to-marino-500 hover:from-marino-500 hover:to-marino-400 text-white font-bold rounded-xl shadow-lg shadow-marino-900/40 active:scale-98 transition-all flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Publicar en Herlinda T.</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Report Content -->
+    <div id="reportModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity">
+        <div class="glass-panel w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-rose-500/30">
+            <div class="px-6 py-4 bg-rose-950/40 border-b border-rose-900/50 flex items-center justify-between">
+                <h3 class="text-xs font-bold text-rose-300 flex items-center gap-2 uppercase tracking-wider">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Reportar Publicación Inapropiada</span>
+                </h3>
+                <button onclick="closeModal('reportModal')" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Ayúdanos a mantener la comunidad de <strong>Herlinda Toral</strong> limpia y respetuosa. ¿Por qué reportas esta publicación?
+                </p>
+                <div class="space-y-2">
+                    <label class="flex items-center gap-2 p-2.5 bg-plomo-950 rounded-lg border border-slate-800 cursor-pointer text-xs text-slate-200">
+                        <input type="radio" name="reportReason" value="gore" checked class="accent-rose-500">
+                        <span>Contenido Gore / Violencia explícita</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2.5 bg-plomo-950 rounded-lg border border-slate-800 cursor-pointer text-xs text-slate-200">
+                        <input type="radio" name="reportReason" value="pedophilia" class="accent-rose-500">
+                        <span>Contenido inapropiado con menores / Pedofilia</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2.5 bg-plomo-950 rounded-lg border border-slate-800 cursor-pointer text-xs text-slate-200">
+                        <input type="radio" name="reportReason" value="hate" class="accent-rose-500">
+                        <span>Acoso escolar grave o agresión personal</span>
+                    </label>
+                </div>
+                <input type="hidden" id="reportMemeId" value="">
+                <button onclick="submitReport()" class="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs transition-colors">
+                    Enviar Reporte a Dirección
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <script>
+        // --- DATA STATE ---
+        const FORBIDDEN_WORDS = [
+            'gore', 'sangre', 'decapitado', 'mutilado', 'asesinato', 'muerte', 'pedofilo', 'pedofilia', 
+            'cp', 'abuse', 'nsfw', 'violacion', 'porno', 'suicidio', 'desmembrado', 'child', 'violencia'
+        ];
+
+        const TEMPLATES = [
+            { name: 'Gato Estudio', url: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&auto=format&fit=crop&q=60' },
+            { name: 'Sorpresa', url: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500&auto=format&fit=crop&q=60' },
+            { name: 'Pensativo', url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60' }
+        ];
+
+        const COURSES_DATA = [
+            {
+                id: '1ro-bach',
+                name: '1ro Bachillerato',
+                badge: '1º',
+                students: 42,
+                notices: [
+                    '📌 Recordatorio: Mañana entrega del proyecto de Química.',
+                    '📢 Traer la autorización para la casa abierta.'
+                ],
+                highlights: ['Cuando química sale a la primera 🧪', 'Examen de historia suspendido 📜']
+            },
+            {
+                id: '2do-bach',
+                name: '2do Bachillerato',
+                badge: '2º',
+                students: 38,
+                notices: [
+                    '📌 Lección de Matemáticas diferida para el viernes.',
+                    '⚽ Torneo intercursos arranca la próxima semana.'
+                ],
+                highlights: ['Cálculo diferencial a las 7 AM 💀', 'Recreo de 15 min duró 5 min']
+            },
+            {
+                id: '3ro-bach',
+                name: '3ro Bachillerato',
+                badge: '3º',
+                students: 45,
+                notices: [
+                    '🎓 Fotos de graduación confirmadas para el próximo mes.',
+                    '📚 Ensayo general del proyecto de grado el miércoles.'
+                ],
+                highlights: ['Último año en Herlinda Toral 🎉', 'Simulacro universitario superado']
+            },
+            {
+                id: 'basica-superior',
+                name: 'Educación Básica Superior',
+                badge: 'EB',
+                students: 60,
+                notices: [
+                    '🎨 Concurso de dibujo y arte escolar abierto.',
+                    '🔔 Revisión del uniforme institucional los lunes.'
+                ],
+                highlights: ['Cuando suena el timbre de salida 🔔', 'Clase de educación física']
+            }
+        ];
+
+        let memes = [
+            {
+                id: 1,
+                title: 'Cuando el profesor de Herlinda Toral dice que el examen es en parejas pero individuales',
+                imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&auto=format&fit=crop&q=80',
+                author: 'Carlos_1roB',
+                course: '1ro Bachillerato',
+                timestamp: 'Hace 20 min',
+                likes: 142,
+                userLiked: false,
+                reactions: { '😂': 88, '💀': 32, '🔥': 20, '💩': 2 },
+                userReaction: null,
+                comments: [
+                    { id: 101, author: 'Mateo_HT', text: 'Literal siempre nos hace la misma 💀', time: 'Hace 10 min' }
+                ]
+            },
+            {
+                id: 2,
+                title: 'Yo exponiendo sin haber abierto las diapositivas en toda la semana',
+                imageUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=800&auto=format&fit=crop&q=80',
+                author: 'Sofia_3roB',
+                course: '3ro Bachillerato',
+                timestamp: 'Hace 1 hora',
+                likes: 230,
+                userLiked: true,
+                reactions: { '😂': 150, '💀': 40, '🔥': 38, '💩': 2 },
+                userReaction: '😂',
+                comments: [
+                    { id: 102, author: 'ProfeDeLengua', text: 'Los estoy observando muchachos... 👀', time: 'Hace 30 min' }
+                ]
+            },
+            {
+                id: 3,
+                title: 'Cuando suena el timbre justo cuando ibas a pasar al pizarrón',
+                imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
+                author: 'Andres_2doB',
+                course: '2do Bachillerato',
+                timestamp: 'Hace 3 horas',
+                likes: 98,
+                userLiked: false,
+                reactions: { '😂': 45, '💀': 30, '🔥': 20, '💩': 3 },
+                userReaction: null,
+                comments: []
+            }
+        ];
+
+        let currentSection = 'memes';
+        let currentSort = 'trending';
+        let searchQuery = '';
+        let uploadTab = 'file';
+        let selectedTemplateUrl = TEMPLATES[0].url;
+
+        // --- INIT ---
+        window.addEventListener('DOMContentLoaded', () => {
+            renderFeed();
+            renderQuickCourses();
+            renderCoursesGrid();
+            renderTemplates();
+            initCreatorCanvas();
+        });
+
+        // --- NAVIGATION SWITCH ---
+        function switchSection(section) {
+            currentSection = section;
+            const memesSec = document.getElementById('section-memes');
+            const cursosSec = document.getElementById('section-cursos');
+            const btnMemes = document.getElementById('nav-memes');
+            const btnCursos = document.getElementById('nav-cursos');
+            const btnMemesMob = document.getElementById('nav-memes-mobile');
+            const btnCursosMob = document.getElementById('nav-cursos-mobile');
+
+            if (section === 'memes') {
+                memesSec.classList.remove('hidden');
+                cursosSec.classList.add('hidden');
+
+                btnMemes.className = "flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all bg-marino-600 text-white shadow-md";
+                btnCursos.className = "flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-300 hover:text-white hover:bg-plomo-900";
+
+                btnMemesMob.className = "flex-1 py-2 text-center text-xs font-bold text-marino-400 border-b-2 border-marino-400";
+                btnCursosMob.className = "flex-1 py-2 text-center text-xs font-bold text-slate-400";
+            } else {
+                memesSec.classList.add('hidden');
+                cursosSec.classList.remove('hidden');
+
+                btnCursos.className = "flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all bg-marino-600 text-white shadow-md";
+                btnMemes.className = "flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-300 hover:text-white hover:bg-plomo-900";
+
+                btnCursosMob.className = "flex-1 py-2 text-center text-xs font-bold text-marino-400 border-b-2 border-marino-400";
+                btnMemesMob.className = "flex-1 py-2 text-center text-xs font-bold text-slate-400";
+            }
+        }
+
+        // --- RENDER FUNCTIONS ---
+        function getFilteredMemes() {
+            return memes.filter(m => {
+                const matchesSearch = searchQuery === '' || 
+                    m.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    m.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    m.course.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesSearch;
+            }).sort((a, b) => {
+                if (currentSort === 'latest') return b.id - a.id;
+                if (currentSort === 'top') return b.likes - a.likes;
+                const scoreA = a.likes + Object.values(a.reactions).reduce((s, v) => s + v, 0);
+                const scoreB = b.likes + Object.values(b.reactions).reduce((s, v) => s + v, 0);
+                return scoreB - scoreA;
+            });
+        }
+
+        function renderFeed() {
+            const feed = document.getElementById('memeFeed');
+            const emptyState = document.getElementById('emptyState');
+            const filteredMemes = getFilteredMemes();
+
+            document.getElementById('memeCountText').textContent = `${filteredMemes.length} memes publicados`;
+
+            if (filteredMemes.length === 0) {
+                feed.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            feed.innerHTML = filteredMemes.map(meme => `
+                <article class="glass-panel rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl transition-all hover:border-slate-600">
+                    <!-- Header -->
+                    <div class="p-4 flex items-center justify-between border-b border-slate-800/80 bg-plomo-900/60">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-marino-600 to-slate-700 flex items-center justify-center font-bold text-white text-xs shadow-md border border-white/20">
+                                ${meme.author.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-xs sm:text-sm leading-tight">${escapeHtml(meme.title)}</h4>
+                                <p class="text-[11px] text-slate-400 mt-0.5">por <span class="text-slate-300 font-medium">@${escapeHtml(meme.author)}</span> • ${meme.timestamp}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-marino-900/90 text-marino-400 border border-marino-600/40 uppercase tracking-wider">
+                                ${escapeHtml(meme.course)}
+                            </span>
+                            <button onclick="openReportModal(${meme.id})" title="Reportar contenido" class="text-slate-500 hover:text-rose-400 p-1.5 transition-colors">
+                                <i class="fa-solid fa-flag text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="bg-plomo-950 flex items-center justify-center max-h-[550px] overflow-hidden">
+                        <img src="${meme.imageUrl}" alt="${escapeHtml(meme.title)}" class="w-full h-auto object-contain max-h-[550px]" loading="lazy">
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="p-4 space-y-3 bg-plomo-900/40">
+                        <div class="flex items-center justify-between gap-2">
+                            <button onclick="toggleLike(${meme.id})" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                                meme.userLiked 
+                                ? 'bg-marino-600 text-white border border-marino-400' 
+                                : 'bg-plomo-950 text-slate-300 border border-slate-800 hover:bg-plomo-800'
+                            }">
+                                <i class="fa-solid fa-heart ${meme.userLiked ? 'animate-heart text-rose-400' : ''}"></i>
+                                <span>${meme.likes}</span>
+                            </button>
+
+                            <div class="flex items-center gap-1 bg-plomo-950 p-1 rounded-xl border border-slate-800">
+                                ${Object.entries(meme.reactions).map(([emoji, count]) => `
+                                    <button onclick="addReaction(${meme.id}, '${emoji}')" 
+                                        class="px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all ${meme.userReaction === emoji ? 'bg-marino-800 border border-marino-500 scale-105' : 'hover:bg-plomo-800'}">
+                                        <span>${emoji}</span>
+                                        <span class="text-[10px] text-slate-300 font-bold">${count}</span>
+                                    </button>
+                                `).join('')}
+                            </div>
+
+                            <button onclick="toggleComments(${meme.id})" class="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-2 py-1">
+                                <i class="fa-regular fa-comment text-sm text-marino-400"></i>
+                                <span>${meme.comments.length}</span>
+                            </button>
+                        </div>
+
+                        <!-- Comments -->
+                        <div id="comments-${meme.id}" class="space-y-3 pt-3 border-t border-slate-800">
+                            <div class="space-y-2 max-h-40 overflow-y-auto pr-1">
+                                ${meme.comments.length === 0 ? '<p class="text-xs text-slate-400 italic">No hay comentarios aún.</p>' : ''}
+                                ${meme.comments.map(c => `
+                                    <div class="bg-plomo-950 p-2.5 rounded-xl border border-slate-800 text-xs space-y-1">
+                                        <div class="flex items-center justify-between font-semibold">
+                                            <span class="text-marino-400">@${escapeHtml(c.author)}</span>
+                                            <span class="text-[10px] text-slate-400">${c.time}</span>
+                                        </div>
+                                        <p class="text-slate-200">${escapeHtml(c.text)}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <form onsubmit="handleAddComment(event, ${meme.id})" class="flex gap-2">
+                                <input type="text" placeholder="Escribe un comentario seguro..." required 
+                                    class="flex-1 px-3 py-1.5 bg-plomo-950 border border-slate-800 rounded-xl focus:outline-none focus:border-marino-400 text-xs text-white placeholder-slate-500">
+                                <button type="submit" class="px-3 py-1.5 bg-marino-600 hover:bg-marino-500 text-white font-bold rounded-xl text-xs transition-colors">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function renderQuickCourses() {
+            const container = document.getElementById('quickCourseList');
+            container.innerHTML = COURSES_DATA.map(c => `
+                <button onclick="openCourseDetail('${c.id}')" class="w-full flex items-center justify-between p-2.5 rounded-xl bg-plomo-950 border border-slate-800/80 hover:border-marino-500 hover:bg-plomo-900 transition-all text-xs text-left">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-6 h-6 rounded-lg bg-marino-600/80 text-white flex items-center justify-center font-bold text-[10px]">
+                            ${c.badge}
+                        </span>
+                        <span class="font-bold text-slate-200">${c.name}</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+                </button>
+            `).join('');
+        }
+
+        function renderCoursesGrid() {
+            const grid = document.getElementById('coursesGrid');
+            grid.innerHTML = COURSES_DATA.map(c => `
+                <div class="glass-panel p-5 rounded-2xl border border-slate-700/80 hover:border-marino-500 transition-all space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="w-10 h-10 rounded-xl bg-gradient-to-tr from-marino-600 to-marino-400 text-white flex items-center justify-center font-black text-sm shadow-md">
+                                ${c.badge}
+                            </span>
+                            <span class="text-[10px] font-bold px-2.5 py-1 bg-plomo-950 text-slate-400 rounded-full border border-slate-800">
+                                <i class="fa-solid fa-users text-marino-400 mr-1"></i>${c.students} Estudiantes
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">${c.name}</h3>
+                            <p class="text-xs text-slate-400">Colegio Herlinda Toral</p>
+                        </div>
+                        <div class="space-y-1.5 pt-2">
+                            <p class="text-[10px] font-bold uppercase text-marino-400">Último Aviso:</p>
+                            <p class="text-xs text-slate-300 bg-plomo-950 p-2 rounded-lg border border-slate-800 line-clamp-2">
+                                ${c.notices[0]}
+                            </p>
+                        </div>
+                    </div>
+                    <button onclick="openCourseDetail('${c.id}')" class="w-full py-2 bg-marino-600/30 hover:bg-marino-600 text-marino-300 hover:text-white border border-marino-500/40 font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+                        <span>Ver Curso y Memes</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function openCourseDetail(courseId) {
+            switchSection('cursos');
+            const course = COURSES_DATA.find(c => c.id === courseId);
+            if (!course) return;
+
+            document.getElementById('detailCourseIcon').textContent = course.badge;
+            document.getElementById('detailCourseTitle').textContent = course.name;
+            document.getElementById('detailCourseSubtitle').textContent = `${course.students} Estudiantes inscritos`;
+
+            document.getElementById('detailCourseNotices').innerHTML = course.notices.map(n => `
+                <div class="p-2.5 rounded-lg bg-plomo-900 border border-slate-800 text-slate-200">
+                    ${n}
+                </div>
+            `).join('');
+
+            document.getElementById('detailCourseMemes').innerHTML = course.highlights.map(h => `
+                <div class="p-2.5 rounded-lg bg-plomo-900 border border-slate-800 text-slate-300 flex items-center justify-between">
+                    <span>${h}</span>
+                    <i class="fa-solid fa-fire text-amber-400 text-xs"></i>
+                </div>
+            `).join('');
+
+            const detailCard = document.getElementById('courseDetailCard');
+            detailCard.classList.remove('hidden');
+            detailCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeCourseDetail() {
+            document.getElementById('courseDetailCard').classList.add('hidden');
+        }
+
+        function renderTemplates() {
+            const picker = document.getElementById('templatePicker');
+            picker.innerHTML = TEMPLATES.map((tmpl) => `
+                <div onclick="selectTemplate('${tmpl.url}')" class="cursor-pointer group relative rounded-lg overflow-hidden border-2 transition-all ${selectedTemplateUrl === tmpl.url ? 'border-marino-400 scale-105' : 'border-slate-800 opacity-70 hover:opacity-100'}">
+                    <img src="${tmpl.url}" alt="${tmpl.name}" class="h-16 w-full object-cover">
+                </div>
+            `).join('');
+        }
+
+        // --- SAFETY / MODERATION ---
+        function checkContentSafety(textInput, imageSource) {
+            const lowerText = textInput.toLowerCase();
+            for (const word of FORBIDDEN_WORDS) {
+                if (lowerText.includes(word)) {
+                    return {
+                        safe: false,
+                        reason: `Contenido Bloqueado: Se detectó término inapropiado o violento ("${word}"). Normas de Herlinda Toral prohíben estrictamente Gore, violencia y acoso.`
+                    };
+                }
+            }
+
+            if (imageSource) {
+                const lowerSrc = imageSource.toLowerCase();
+                for (const word of FORBIDDEN_WORDS) {
+                    if (lowerSrc.includes(word)) {
+                        return {
+                            safe: false,
+                            reason: `Imagen Bloqueada: Archivo detectado como no apto para la comunidad estudiantil.`
+                        };
+                    }
+                }
+            }
+
+            return { safe: true };
+        }
+
+        // --- INTERACTION LOGIC ---
+        function toggleLike(memeId) {
+            const meme = memes.find(m => m.id === memeId);
+            if (!meme) return;
+            meme.userLiked = !meme.userLiked;
+            meme.likes += meme.userLiked ? 1 : -1;
+            renderFeed();
+        }
+
+        function addReaction(memeId, emoji) {
+            const meme = memes.find(m => m.id === memeId);
+            if (!meme) return;
+
+            if (meme.userReaction === emoji) {
+                meme.reactions[emoji]--;
+                meme.userReaction = null;
+            } else {
+                if (meme.userReaction) meme.reactions[meme.userReaction]--;
+                meme.reactions[emoji]++;
+                meme.userReaction = emoji;
+            }
+            renderFeed();
+        }
+
+        function toggleComments(memeId) {
+            const section = document.getElementById(`comments-${memeId}`);
+            if (section) section.classList.toggle('hidden');
+        }
+
+        function handleAddComment(e, memeId) {
+            e.preventDefault();
+            const input = e.target.querySelector('input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const safety = checkContentSafety(text, null);
+            if (!safety.safe) {
+                showToast(safety.reason, 'error');
+                return;
+            }
+
+            const meme = memes.find(m => m.id === memeId);
+            if (meme) {
+                meme.comments.push({
+                    id: Date.now(),
+                    author: 'Estudiante',
+                    text: text,
+                    time: 'Ahora'
+                });
+                input.value = '';
+                renderFeed();
+                showToast('Comentario enviado correctamente');
+            }
+        }
+
+        function setSort(sortType) {
+            currentSort = sortType;
+            ['trending', 'latest', 'top'].forEach(s => {
+                const btn = document.getElementById(`sort-${s}`);
+                if (s === sortType) {
+                    btn.className = "flex-1 md:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-marino-600 text-white";
+                } else {
+                    btn.className = "flex-1 md:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-300 hover:text-white";
+                }
+            });
+            renderFeed();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value;
+            renderFeed();
+        }
+
+        function resetFilters() {
+            searchQuery = '';
+            document.getElementById('searchInput').value = '';
+            setSort('trending');
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function switchImageTab(tab) {
+            uploadTab = tab;
+            const fileContainer = document.getElementById('input-file-container');
+            const urlContainer = document.getElementById('input-url-container');
+            const tabFile = document.getElementById('tab-file');
+            const tabUrl = document.getElementById('tab-url');
+
+            if (tab === 'file') {
+                fileContainer.classList.remove('hidden');
+                urlContainer.classList.add('hidden');
+                tabFile.className = "flex-1 py-1.5 bg-marino-600 text-white rounded-lg text-xs font-bold";
+                tabUrl.className = "flex-1 py-1.5 bg-plomo-800 text-slate-300 rounded-lg text-xs font-bold";
+            } else {
+                fileContainer.classList.add('hidden');
+                urlContainer.classList.remove('hidden');
+                tabUrl.className = "flex-1 py-1.5 bg-marino-600 text-white rounded-lg text-xs font-bold";
+                tabFile.className = "flex-1 py-1.5 bg-plomo-800 text-slate-300 rounded-lg text-xs font-bold";
+            }
+        }
+
+        function previewUploadedFile(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (evt) => showUploadPreview(evt.target.result);
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function previewUrlImage() {
+            const url = document.getElementById('imageUrlInput').value.trim();
+            if (url) showUploadPreview(url);
+        }
+
+        function showUploadPreview(src) {
+            const container = document.getElementById('uploadPreviewContainer');
+            const img = document.getElementById('uploadPreviewImage');
+            img.src = src;
+            container.classList.remove('hidden');
+        }
+
+        function handleMemeUpload(e) {
+            e.preventDefault();
+            const title = document.getElementById('memeTitle').value.trim();
+            const course = document.getElementById('memeCourseSelect').value;
+            const author = document.getElementById('memeAuthor').value.trim() || 'Estudiante';
+            const previewImg = document.getElementById('uploadPreviewImage');
+
+            if (!previewImg.src || document.getElementById('uploadPreviewContainer').classList.contains('hidden')) {
+                showToast('Por favor selecciona una imagen previa', 'error');
+                return;
+            }
+
+            const scanStatus = document.getElementById('scanStatus');
+            const btnSubmit = document.getElementById('btnSubmitMeme');
+            scanStatus.classList.remove('hidden');
+            btnSubmit.disabled = true;
+
+            setTimeout(() => {
+                const safety = checkContentSafety(title, previewImg.src);
+
+                scanStatus.classList.add('hidden');
+                btnSubmit.disabled = false;
+
+                if (!safety.safe) {
+                    showToast(safety.reason, 'error');
+                    return;
+                }
+
+                const newMeme = {
+                    id: Date.now(),
+                    title: title,
+                    imageUrl: previewImg.src,
+                    author: author,
+                    course: course,
+                    timestamp: 'Ahora mismo',
+                    likes: 1,
+                    userLiked: true,
+                    reactions: { '😂': 1, '💀': 0, '🔥': 1, '💩': 0 },
+                    userReaction: '🔥',
+                    comments: []
+                };
+
+                memes.unshift(newMeme);
+                closeModal('uploadModal');
+                document.getElementById('uploadForm').reset();
+                document.getElementById('uploadPreviewContainer').classList.add('hidden');
+                switchSection('memes');
+                renderFeed();
+                showToast('¡Meme aprobado y publicado en Herlinda Toral!');
+            }, 700);
+        }
+
+        let canvas, ctx;
+        let creatorImage = new Image();
+
+        function initCreatorCanvas() {
+            canvas = document.getElementById('memeCanvas');
+            ctx = canvas.getContext('2d');
+            selectTemplate(TEMPLATES[0].url);
+        }
+
+        function selectTemplate(url) {
+            selectedTemplateUrl = url;
+            renderTemplates();
+            creatorImage = new Image();
+            creatorImage.crossOrigin = 'Anonymous';
+            creatorImage.src = url;
+            creatorImage.onload = () => updateMemeCanvas();
+        }
+
+        function updateMemeCanvas() {
+            if (!creatorImage.complete) return;
+
+            canvas.width = creatorImage.naturalWidth || 600;
+            canvas.height = creatorImage.naturalHeight || 600;
+
+            ctx.drawImage(creatorImage, 0, 0, canvas.width, canvas.height);
+
+            const fontSize = Math.floor(canvas.width / 10);
+            ctx.fillStyle = 'white';
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = Math.max(2, Math.floor(fontSize / 8));
+            ctx.font = `900 ${fontSize}px Impact, Arial Black, sans-serif`;
+            ctx.textAlign = 'center';
+
+            const topText = document.getElementById('topTextInput').value.toUpperCase();
+            const bottomText = document.getElementById('bottomTextInput').value.toUpperCase();
+
+            if (topText) {
+                ctx.textBaseline = 'top';
+                ctx.strokeText(topText, canvas.width / 2, 20);
+                ctx.fillText(topText, canvas.width / 2, 20);
+            }
+
+            if (bottomText) {
+                ctx.textBaseline = 'bottom';
+                ctx.strokeText(bottomText, canvas.width / 2, canvas.height - 20);
+                ctx.fillText(bottomText, canvas.width / 2, canvas.height - 20);
+            }
+        }
+
+        function publishCreatedMeme() {
+            const topText = document.getElementById('topTextInput').value;
+            const bottomText = document.getElementById('bottomTextInput').value;
+            const title = document.getElementById('createdMemeTitle').value.trim() || 'Meme Creado';
+            const course = document.getElementById('createdMemeCourse').value;
+            const author = document.getElementById('createdMemeAuthor').value.trim() || 'CreadorHT';
+
+            const safety = checkContentSafety(`${title} ${topText} ${bottomText}`, null);
+            if (!safety.safe) {
+                showToast(safety.reason, 'error');
+                return;
+            }
+
+            const dataUrl = canvas.toDataURL('image/png');
+
+            const newMeme = {
+                id: Date.now(),
+                title: title,
+                imageUrl: dataUrl,
+                author: author,
+                course: course,
+                timestamp: 'Ahora mismo',
+                likes: 1,
+                userLiked: true,
+                reactions: { '😂': 1, '💀': 0, '🔥': 1, '💩': 0 },
+                userReaction: '🔥',
+                comments: []
+            };
+
+            memes.unshift(newMeme);
+            closeModal('creatorModal');
+            document.getElementById('topTextInput').value = '';
+            document.getElementById('bottomTextInput').value = '';
+            document.getElementById('createdMemeTitle').value = '';
+            switchSection('memes');
+            renderFeed();
+            showToast('¡Meme creado y publicado exitosamente! 🎉');
+        }
+
+        function openReportModal(memeId) {
+            document.getElementById('reportMemeId').value = memeId;
+            openModal('reportModal');
+        }
+
+        function submitReport() {
+            closeModal('reportModal');
+            showToast('Reporte enviado a la administración estudiantil.', 'success');
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-plomo-900 border-emerald-500 text-emerald-300' : 'bg-plomo-900 border-rose-500 text-rose-300';
+            const icon = type === 'success' ? 'fa-shield-check text-emerald-400' : 'fa-triangle-exclamation text-rose-400';
+
+            toast.className = `${bgColor} border px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-semibold pointer-events-auto transition-all transform translate-y-2 opacity-0 max-w-sm`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-base flex-shrink-0"></i>
+                <span class="leading-tight">${escapeHtml(message)}</span>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
